@@ -18,7 +18,6 @@ def extract_references(section: Section):
     return set(re.findall("\(.+?\)", section.text))
 
 
-extract_references(restructured_sections[5])
 for original, restructured in zip(original_sections, restructured_sections):
     original_refs = extract_references(original)
     restructured_refs = extract_references(restructured)
