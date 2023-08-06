@@ -4,13 +4,20 @@ import openai
 from tqdm import tqdm
 
 from api_key import openai_api_key
-from odyssey import Section
+
+from .section import Section
 
 openai.api_key = openai_api_key
 
 
 sections = Section.cut_markdown(Path("notes/original.md").read_text())
-prompt = "The following are some of my notes. Please re-organize them into coherent text I can use as a section of an essay. Only re-use my words, do not add any content. Keep citations in brackets, like so (Frame, 98-100). Do not structure your response as an entire essay - I will use it as part of a whole."
+prompt = (
+    "The following are some of my notes. "
+    "Please re-organize them into coherent text I can use as a section of an essay. "
+    "Only re-use my words, do not add any content. "
+    "Keep citations in brackets, like so (Frame, 98-100). "
+    "Do not structure your response as an entire essay - I will use it as part of a whole."
+)
 
 restructured_sections = []
 for section in tqdm(sections):
