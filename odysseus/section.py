@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from functools import cached_property
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,10 @@ class Section:
             title=lines[0].replace("#", "").strip(),
             text="\n".join(line.strip() for line in lines[1:]).strip(),
         )
+
+    @cached_property
+    def word_count(self):
+        return self.title.count(" ") + self.text.count(" ")
 
     def to_markdown(self):
         return "#" * self.level + " " + self.title + "\n\n" + self.text
